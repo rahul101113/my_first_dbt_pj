@@ -1,0 +1,8 @@
+cloud_provider,cloud_sku_id,gpu_model,gpu_count,tflops_per_unit,memory_gb_per_unit
+AWS,p4d.24xlarge,NVIDIA A100,8,312,320
+AWS,p5.48xlarge,NVIDIA H100,8,1979,640
+AWS,g5.xlarge,NVIDIA A10G,1,31.5,24
+Azure,Standard_ND924ms_A100_v4,NVIDIA A100,8,312,320
+Azure,Standard_ND96isr_H100_v5,NVIDIA H100,8,1979,640
+GCP,a2-highgpu-1g,NVIDIA A100,1,312,40
+GCP,a3-highgpu-8g,NVIDIA H100,8,1979,640

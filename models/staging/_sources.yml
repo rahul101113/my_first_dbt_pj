@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: external_raw_data
+    database: FINOPS_DB
+    schema: BRONZE
+    description: "Raw landing zone for cloud billing and technical telemetry."
+    tables:
+      - name: raw_aws_cur
+        description: "Raw AWS CUR data ingested via Snowpipe from S3."
+        loaded_at_field: ingested_at
+        tests:
+          - not_null:
+              column_name: raw_data
+
+      - name: raw_gpu_telemetry
+        description: "Raw GPU utilization metrics from CloudWatch or Prometheus."
+        loaded_at_field: ingested_at
