@@ -1,0 +1,4 @@
+user_email,cost_center_id
+manager_a@company.com,CC-101
+manager_b@company.com,CC-202
+finance_admin@company.com,*
