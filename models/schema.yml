@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  # --- BRONZE LAYER (RAW) ---
+  - name: raw_aws_cur
+    description: "Raw landing table for AWS Cost and Usage Report (CUR). Contains immutable JSON blobs."
+    columns:
+      - name: raw_data
+        description: "The original JSON object from AWS S3."
+        tests:
+          - not_null
+
+  # --- SILVER LAYER (STANDARDIZED) ---
+  - name: stg_aws__billing
+    description: "Standardized AWS billing data aligned to FOCUS 1.0 format."
+    columns:
+      - name: billed_cost
+        description: "The unblended cost of the resource."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: resource_id
+        tests:
+          - not_null
+
+  - name: stg_gpu__telemetry
+    description: "Flattened GPU performance logs including utilization and memory metrics."
+    columns:
+      - name: gpu_utilization_pct
+        description: "The percentage of GPU cores active during the metric window."
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
+
+  # --- GOLD LAYER (CURATED) ---
+  - name: fct_gpu_usage_comprehensive
+    description: "Final GPU Mart. Joins billing and telemetry to calculate Idle Waste ($)."
+    columns:
+      - name: idle_waste_amount
+        description: "BilledCost * (1 - (AvgUtilization / 100)). Represents financial inefficiency."
+        tests:
+          - not_null
+      - name: run_id
+        description: "The specific ML training or inference job ID."
+      - name: user_id
+        description: "The individual developer or service account responsible for the spend."
+      - name: cost_center
+        description: "The business department mapped via the dim_user_cost_centers seed."
+        tests:
+          - relationships:
+              to: ref('dim_user_cost_centers')
+              field: cost_center
