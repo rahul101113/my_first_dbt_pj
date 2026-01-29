@@ -39,9 +39,11 @@ models:
     description: "Final GPU Mart. Joins billing and telemetry to calculate Idle Waste ($)."
     columns:
       - name: idle_waste_amount
-        description: "BilledCost * (1 - (AvgUtilization / 100)). Represents financial inefficiency."
+        description: "The financial value of GPU capacity that was paid for but remained unutilized. Formula: EffectiveCost * (1 - Util%), BilledCost * (1 - (AvgUtilization / 100)). Represents financial inefficiency."
         tests:
           - not_null
+      - name: cost_per_effective_tflop
+        description: "Unit economic metric: Total cost divided by the actual TFLOPs processed. Allows for hardware efficiency comparisons."
       - name: run_id
         description: "The specific ML training or inference job ID."
       - name: user_id
