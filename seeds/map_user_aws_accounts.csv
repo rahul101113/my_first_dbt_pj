@@ -1,0 +1,4 @@
+user_id,aws_account_id,environment
+user_01,123456789012,production
+user_01,987654321098,staging
+user_03,111222333444,development

@@ -1,0 +1,5 @@
+user_id,user_name,cost_center,department
+user_01,Alice Smith,CC-101,AI Research
+user_02,Bob Jones,CC-101,AI Research
+user_03,Charlie Brown,CC-202,Product Engineering
+user_04,Dana White,CC-303,Platform Ops
