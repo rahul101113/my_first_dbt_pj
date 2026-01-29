@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: telemetry_raw
+    tables:
+      - name: raw_gpu_telemetry
+        description: "Unified table for GPU metrics across all cloud providers."
+        columns:
+          - name: raw_data
+          - name: cloud_provider # 'aws', 'azure', or 'gcp'

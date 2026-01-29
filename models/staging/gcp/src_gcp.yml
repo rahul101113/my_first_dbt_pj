@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: gcp_raw
+    database: FINOPS_DB
+    schema: BRONZE
+    description: "Raw landing zone for GCP BigQuery Billing exports."
+    tables:
+      - name: raw_gcp_billing
+        description: "Raw JSON from GCP Cloud Billing. Includes project labels and SKU details."
+        columns:
+          - name: raw_data
+            description: "JSON variant containing cost, usage, project, and credits (CUDs/SUDs)."

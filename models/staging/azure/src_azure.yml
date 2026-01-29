@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: azure_raw
+    database: FINOPS_DB
+    schema: BRONZE
+    description: "Raw landing zone for Azure Cost Management exports."
+    tables:
+      - name: raw_azure_billing
+        description: "Contains raw JSON blobs from Azure Amortized Cost exports."
+        columns:
+          - name: raw_data
+            description: "JSON variant containing fields like UsageDateTime, CostInBillingCurrency, and ResourceId."
+          - name: ingested_at
+            description: "Timestamp when Snowpipe loaded the file."
